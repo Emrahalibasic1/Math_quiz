@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Math Quiz - Pitanja</title>
+</head>
+<body>
+    <h1>Matematički Kviz - Pitanja</h1>
+    <div class="container">
+        <form action="/result" method="POST">
+            {% for num1, num2 in numbers %}
+                <div>
+                    {{ num1 }} <span class="selected-operation">{{ operation }}</span> {{ num2 }} =
+                    <input type="hidden" name="question_{{ loop.index0 }}" value="{{ num1 }} {{ operation }} {{ num2 }}">
+                    <input type="number" name="answer_{{ loop.index0 }}" required>
+                </div>
+            {% endfor %}
+            <input type="hidden" name="total_questions" value="{{ numbers|length }}">
+            <button type="submit">Završi</button>
+        </form>
+    </div>
+</body>
+</html>
